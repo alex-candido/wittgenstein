@@ -1,7 +1,7 @@
 
+import { classifyPrompt } from "@/lib/gemini/classification.agent";
+import { generateDiagram } from "@/lib/gemini/generator.agent";
 import { NextResponse } from "next/server";
-import { classifyPrompt } from "@/lib/agents/classification.agent";
-import { generateDiagram } from "@/lib/agents/generator.agent";
 
 export async function POST(request: Request) {
   try {
