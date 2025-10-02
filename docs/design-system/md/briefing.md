@@ -1,48 +1,28 @@
 ### **Project Briefing: presenterai**
 
-**1. Project Title:**
+**Project Title:**
 presenterai (um Micro-SaaS)
 
-**2. Core Objective:**
+**Core Objective:**
 Capacitar usuários a criar apresentações completas e visualmente impactantes, no formato Excalidraw, de forma rápida e inteligente. O foco é transformar um simples prompt ou um conteúdo bruto em uma apresentação estruturada e customizável, minimizando o esforço manual.
 
-**3. Description:**
+**Description:**
 `presenterai` é uma ferramenta de IA que reinventa o processo de criação de apresentações. Em vez de começar com uma tela em branco, o usuário fornece um tema ou conteúdo inicial. A IA então propõe um **esboço (outline)** completo da apresentação, slide por slide. Este esboço é totalmente editável, permitindo que o usuário refine a narrativa. Para cada slide no esboço, o usuário pode definir parâmetros cruciais como o **tipo de layout visual** (ex: comparação, linha do tempo, processo), a **profundidade do conteúdo** (de conciso a extenso) e palavras-chave para guiar a IA. Após a aprovação do esboço, a IA gera todos os slides no formato Excalidraw, entregando uma apresentação pronta dentro de um ambiente de edição intuitivo.
 
-**4. Target Audience:**
+**Target Audience:**
 Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precise criar apresentações de forma ágil, mas que não queira sacrificar a qualidade visual ou a estrutura da narrativa.
 
-**5. User Journey:**
+**User Flow:**
 
-1.  **Project Creation:**
-    *   O usuário inicia uma nova **Apresentação**.
-    *   Fornece a entrada inicial:
-        *   **A partir de um Prompt:** (ex: "Uma apresentação sobre a evolução da inteligência artificial").
-        *   **A partir de um Conteúdo:** (ex: cola um texto, artigo ou documento).
-    *   Define parâmetros globais:
-        *   Quantidade de slides desejada.
-        *   Estilo geral (ex: profissional, criativo, minimalista).
-        *   Idioma da apresentação.
+1.  **Dashboard:** O usuário vê sua lista de `Documents` (projetos) em `/app/documents`. Ele clica em "+ Novo" para começar.
+2.  **Criação e Redirecionamento:** Um novo `Document` em branco é criado, e o usuário é levado para o workspace principal em `/app/documents/[id]`.
+3.  **Workspace (Hub do Documento):** Esta é a página central.
+    *   **Geração:** O usuário insere um prompt no formulário principal para criar sua primeira `Generation`. O `outline` gerado pela IA aparece na mesma tela para edição.
+    *   **Criação da Apresentação:** Após editar o outline, o usuário clica em "Gerar Apresentação". O sistema cria a `Presentation` e a exibe na área de canvas.
+    *   **Novas Versões:** O usuário pode, a qualquer momento, iniciar uma nova `Generation` (novo prompt) ou revisitar uma `Generation` antiga para criar uma nova `Presentation` a partir dela.
+4.  **Visualização e Edição:** O usuário pode navegar para a página de uma `Presentation` específica (`/app/documents/[id]/presentation/[code]`) para focar na edição e para o modo de apresentação.
 
-2.  **Outline Generation and Customization:**
-    *   Ao clicar em "Gerar", a IA cria e exibe uma lista com os esboços de cada slide (título e tópicos).
-    *   O usuário pode **editar, reordenar, adicionar ou remover** slides deste esboço.
-    *   Para **cada slide** no esboço, o usuário define:
-        *   **Tipo de Layout Visual:** `Comparação`, `Convergência`, `Evolução`, `Estrutura`, `Processo Linear`, `Timeline`, `Citação`, `Imagem e Tópicos`, etc. (Isso instrui a IA sobre *como* organizar visualmente a informação).
-        *   **Profundidade do Conteúdo:** `Mínimo`, `Conciso`, `Detalhado`, `Extenso`.
-        *   **Palavras-chave:** Termos específicos para garantir que o conteúdo daquele slide seja focado.
-
-3.  **Final Presentation Generation:**
-    *   Após customizar o esboço, o usuário clica em "Gerar Apresentação".
-    *   A IA processa cada item do esboço e gera os slides correspondentes no formato Excalidraw.
-    *   O usuário é redirecionado para a página de edição (`/presentation/[id]`).
-
-4.  **Editing Environment:**
-    *   **Esquerda:** Uma lista de miniaturas dos slides (`Slide List`) para navegação.
-    *   **Centro:** A área principal (`Slide View`) com o slide selecionado renderizado em um canvas Excalidraw, permitindo edições e ajustes finos.
-    *   **Topo:** Uma barra de ferramentas (`Toolbar`) com opções gerais de apresentação (ex: exportar, modo apresentação, configurações).
-
-**6. Key Features**
+**Key Features**
 
 *   **Criação Multi-fonte:** Inicie uma apresentação a partir de um simples prompt de texto ou colando um conteúdo/artigo existente.
 *   **Outline Inteligente:** A IA gera um esboço estruturado (títulos e tópicos) de toda a apresentação, servindo como um primeiro rascunho da narrativa.
@@ -54,7 +34,27 @@ Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precis
 *   **Geração para Excalidraw:** Converte o esboço customizado em uma apresentação completa e visualmente rica, renderizada no formato Excalidraw.
 *   **Ambiente de Edição Integrado:** Um editor que combina a lista de slides para navegação com um canvas Excalidraw para ajustes finos e edições manuais.
 
-**7. Tech Stack**
+**Conceptual Diagram:**
+
+*   **Entidades:** `User`, `Document`, `Generation`, `Presentation`.
+*   **Associações:**
+    *   **User <-> Document (1-para-Muitos):** Um usuário pode ter múltiplos documentos (projetos).
+    *   **Document <-> Generation (1-para-Muitos):** Um documento pode ter um histórico de múltiplas tentativas de geração (prompts e outlines).
+    *   **Generation <-> Presentation (1-para-Muitos):** A partir de um outline, o usuário pode gerar múltiplas versões visuais (apresentações).
+
+**Application Route Structure**
+
+A estrutura de rotas é projetada para ser centralizada no "Hub do Documento".
+
+*   `/app/documents`: **Lista de Documentos**. Exibe todos os projetos. O botão "+ Novo" cria um `Document` em branco e redireciona o usuário diretamente para a página do Hub (`/app/documents/[id]`)
+
+*   `/app/documents/[id]`: **Hub do Documento**. É a página principal de um projeto. Se o documento for novo, exibe o formulário para criar a primeira `Generation`. Se já tiver conteúdo, exibe a `Presentation` principal (a mais recente) e os históricos.
+
+*   `/app/documents/[id]/generate/[code]`: **Página da Geração**. Exibe a `Generation` principal (`code` será o ID da mais recente) e permite editar seu `outline`. A página também lista o histórico de outras `Generation`s para aquele documento.
+
+*   `/app/documents/[id]/presentation/[code]`: **Workspace da Apresentação**. Exibe a `Presentation` principal (`code` será o ID da mais recente) com o ambiente de edição. A página também lista o histórico de outras `Presentation`s.
+
+**Tech Stack**
 
 *   **Next.js 15:** Framework React full-stack para construir tanto o frontend (interface do usuário) quanto o backend (API).
 *   **Next-Auth:** Solução de autenticação para gerenciar o login de usuários.

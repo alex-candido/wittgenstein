@@ -1,3 +1,3 @@
 export default function Page() {
-  return <h1>list projects</h1>;
+  return <h1>list project</h1>;
 }
