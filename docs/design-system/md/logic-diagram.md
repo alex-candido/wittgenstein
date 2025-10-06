@@ -1,3 +1,5 @@
+> **Nota:** Este diagrama representa a estrutura interna do banco de dados. O fluxo da aplicação para o usuário final é mais linear (`/app` -> `/app/generate` -> `/app/presentation`) e abstrai o conceito de `Document`, que funciona como um agrupador interno.
+
 ```dbml
 Enum Status {
   ACTIVE
@@ -42,7 +44,7 @@ Table Document {
   latest_presentation_id   integer      [ref: > Presentation.id, note: "Ponteiro para a última Presentation. Pode ser nulo."]
   status                   Status       [default: "ACTIVE"]
   created_at               timestamp
-  updated_at               timestamp
+  updated_at       timestamp
 }
 
 Table Generation {

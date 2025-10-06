@@ -11,16 +11,14 @@ Capacitar usuários a criar apresentações completas e visualmente impactantes,
 
 **Target Audience:**
 Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precise criar apresentações de forma ágil, mas que não queira sacrificar a qualidade visual ou a estrutura da narrativa.
-
 **User Flow:**
 
-1.  **Dashboard:** O usuário vê sua lista de `Documents` (projetos) em `/app/documents`. Ele clica em "+ Novo" para começar.
-2.  **Criação e Redirecionamento:** Um novo `Document` em branco é criado, e o usuário é levado para o workspace principal em `/app/documents/[id]`.
-3.  **Workspace (Hub do Documento):** Esta é a página central.
-    *   **Geração:** O usuário insere um prompt no formulário principal para criar sua primeira `Generation`. O `outline` gerado pela IA aparece na mesma tela para edição.
-    *   **Criação da Apresentação:** Após editar o outline, o usuário clica em "Gerar Apresentação". O sistema cria a `Presentation` e a exibe na área de canvas.
-    *   **Novas Versões:** O usuário pode, a qualquer momento, iniciar uma nova `Generation` (novo prompt) ou revisitar uma `Generation` antiga para criar uma nova `Presentation` a partir dela.
-4.  **Visualização e Edição:** O usuário pode navegar para a página de uma `Presentation` específica (`/app/documents/[id]/presentation/[code]`) para focar na edição e para o modo de apresentação.
+1.  **Ponto de Partida (Chat):** O usuário acessa `/app` e se depara com uma interface de chat, pronta para receber um prompt. Este é o ponto de partida para qualquer nova apresentação.
+2.  **Geração do Outline:** Ao submeter um prompt, o sistema processa a ideia e redireciona o usuário para `/app/generate/[generateId]`.
+3.  **Edição do Outline:** Nesta página, o usuário visualiza o esboço (outline) slide a slide proposto pela IA. Ele pode editar títulos, reordenar slides e ajustar parâmetros como layout e profundidade para cada um.
+4.  **Criação da Apresentação:** Com o outline refinado, o usuário clica em "Criar Apresentação". O sistema gera a versão visual e o redireciona para `/app/presentation/[presentationId]`.
+5.  **Workspace e Edição Final:** O usuário aterrissa no workspace da apresentação, onde pode fazer ajustes finos diretamente nos slides (formato Excalidraw).
+6.  **Galeria de Apresentações:** A qualquer momento, o usuário pode acessar `/app/documents` para ver uma galeria com todas as suas apresentações finalizadas.
 
 **Key Features**
 
@@ -44,15 +42,16 @@ Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precis
 
 **Application Route Structure**
 
-A estrutura de rotas é projetada para ser centralizada no "Hub do Documento".
+A estrutura de rotas é projetada para ser linear e focada na tarefa.
 
-*   `/app/documents`: **Lista de Documentos**. Exibe todos os projetos. O botão "+ Novo" cria um `Document` em branco e redireciona o usuário diretamente para a página do Hub (`/app/documents/[id]`)
+*   `/app`: **Ponto de Partida (Chat)**. Interface principal para o usuário inserir um prompt e iniciar a criação de uma nova apresentação.
 
-*   `/app/documents/[id]`: **Hub do Documento**. É a página principal de um projeto. Se o documento for novo, exibe o formulário para criar a primeira `Generation`. Se já tiver conteúdo, exibe a `Presentation` principal (a mais recente) e os históricos.
+*   `/app/generate/[generateId]`: **Editor de Outline**. Página dedicada a editar e refinar o esboço (outline) de uma apresentação específica, identificada pelo `generateId`.
 
-*   `/app/documents/[id]/generate/[code]`: **Página da Geração**. Exibe a `Generation` principal (`code` será o ID da mais recente) e permite editar seu `outline`. A página também lista o histórico de outras `Generation`s para aquele documento.
+*   `/app/presentation/[presentationId]`: **Workspace da Apresentação**. Ambiente final de edição e visualização da apresentação, identificada pelo `presentationId`.
 
-*   `/app/documents/[id]/presentation/[code]`: **Workspace da Apresentação**. Exibe a `Presentation` principal (`code` será o ID da mais recente) com o ambiente de edição. A página também lista o histórico de outras `Presentation`s.
+*   `/app/documents`: **Galeria de Apresentações**. Exibe uma lista de todas as apresentações finalizadas pelo usuário, servindo como seu portfólio.
+
 
 **Tech Stack**
 
