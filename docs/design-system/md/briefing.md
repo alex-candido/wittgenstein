@@ -42,15 +42,35 @@ Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precis
 
 **Application Route Structure**
 
-A estrutura de rotas é projetada para ser linear e focada na tarefa.
+A estrutura de rotas do `presenterai` é organizada em grupos para modularizar as diferentes áreas da aplicação. Cada grupo de rotas (`(group)`) representa um contexto específico, como autenticação, a aplicação principal, o painel de administração, etc.
 
-*   `/app`: **Ponto de Partida (Chat)**. Interface principal para o usuário inserir um prompt e iniciar a criação de uma nova apresentação.
+*   `(home)`: **Página Inicial e de Marketing**
+    *   `/`: A landing page principal do projeto, com informações sobre o produto, features e call-to-actions (CTAs) para inscrição ou login.
 
-*   `/app/generate/[generateId]`: **Editor de Outline**. Página dedicada a editar e refinar o esboço (outline) de uma apresentação específica, identificada pelo `generateId`.
+*   `(auth)`: **Fluxos de Autenticação**
+    *   `/auth/sign-in`: Página de login para usuários existentes.
+    *   `/auth/sign-up`: Página de cadastro para novos usuários.
+    *   `/auth/forgot-password`: Fluxo para recuperação de senha.
+    *   `/auth/reset-password`: Página para definir uma nova senha após a recuperação.
 
-*   `/app/presentation/[presentationId]`: **Workspace da Apresentação**. Ambiente final de edição e visualização da apresentação, identificada pelo `presentationId`.
+*   `(app)`: **O Coração do Produto**
+    *   `/app`: **Ponto de Partida (Chat)**. Interface principal para o usuário inserir um prompt e iniciar a criação de uma nova apresentação.
+    *   `/app/generate/[generateId]`: **Editor de Outline**. Página dedicada a editar e refinar o esboço (outline) de uma apresentação específica.
+    *   `/app/presentation/[presentationId]`: **Workspace da Apresentação**. Ambiente final de edição e visualização da apresentação.
+    *   `/app/documents`: **Galeria de Apresentações**. Exibe uma lista de todas as apresentações finalizadas pelo usuário.
 
-*   `/app/documents`: **Galeria de Apresentações**. Exibe uma lista de todas as apresentações finalizadas pelo usuário, servindo como seu portfólio.
+*   `(admin)`: **Painel de Administração**
+    *   `/admin/dashboard`: Visão geral com estatísticas de uso, novos usuários e atividades recentes.
+    *   `/admin/users`: Gerenciamento de usuários da plataforma.
+    *   `/admin/documents`: Visualização e gerenciamento de todos os documentos criados.
+    *   `/admin/generations`: Acesso a todas as gerações de outlines.
+    *   `/admin/presentations`: Acesso a todas as apresentações finais geradas.
+
+*   `(docs)`: **Documentação do Produto**
+    *   `/docs`: Hub central para a documentação, tutoriais e guias de uso da ferramenta.
+
+*   `(terms)`: **Páginas Legais**
+    *   `/terms`: Página para os Termos de Serviço e Política de Privacidade.
 
 
 **Tech Stack**

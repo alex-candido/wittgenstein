@@ -3,7 +3,10 @@
 import type { ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
+import { AppProvider } from "@/providers/app-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { AppGenerateProvider } from "@/providers/app-generate-provider";
+import { AppPresentationsProvider } from "@/providers/app-presentations-provider";
 
 export function Providers({
   children,
@@ -17,8 +20,14 @@ export function Providers({
       enableSystem
       disableTransitionOnChange
     >
-      {children}
-      <Toaster />
+      <AppProvider>
+        <AppGenerateProvider>
+          <AppPresentationsProvider>
+            {children}
+            <Toaster />
+          </AppPresentationsProvider>
+        </AppGenerateProvider>
+      </AppProvider>
     </ThemeProvider>
   );
 }
