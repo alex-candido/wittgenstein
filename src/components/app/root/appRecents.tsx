@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
-export function RecentPresentations({
+export function AppRecents({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   return (
     <div
-      className={cn("app-recent-presentations flex flex-col", className)}
+      className={cn("app-recents flex flex-col", className)}
       {...props}
     >
       presentationHeader

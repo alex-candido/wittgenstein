@@ -1,21 +1,21 @@
 import {
-  PresentationControls,
-  PresentationHeader,
-  PresentationInput,
-  PresentationMode,
-  RecentPresentations,
-  SuggestionPresentations,
-} from "@/components/app";
+  AppFormControls,
+  AppFormHeader,
+  AppFormInput,
+  AppFormMode,
+  AppRecents,
+  AppSuggestions,
+} from "@/components/app/root";
 
 export default function AppPage() {
   return (
     <div className="app-page">
-      <PresentationHeader />
-      <PresentationMode />
-      <PresentationInput />
-      <PresentationControls />
-      <RecentPresentations />
-      <SuggestionPresentations />
+      <AppFormHeader />
+      <AppFormMode />
+      <AppFormInput />
+      <AppFormControls />
+      <AppRecents />
+      <AppSuggestions />
     </div>
   );
 }

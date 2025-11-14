@@ -1,6 +1,6 @@
 "use client";
 
-import { AppAside, AppFooter, AppHeader } from "@/components/app";
+import { AppLayoutAside, AppLayoutFooter, AppLayoutHeader } from "@/components/app/root/index";
 import { LayoutApp, LayoutMain } from "@/components/layouts";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -9,11 +9,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       id="app"
       className="flex min-h-screen w-full flex-col bg-muted/40"
     >
-      <AppAside />
+      <AppLayoutAside />
       <div className="layout-container">
-        <AppHeader />
+        <AppLayoutHeader />
         <LayoutMain>{children}</LayoutMain>
-        <AppFooter />
+        <AppLayoutFooter />
       </div>
     </LayoutApp>
   );
