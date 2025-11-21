@@ -1,3 +1,11 @@
-export default function Page() {
-  return <h1>forgot-password page</h1>;
+"use client";
+
+import { ForgotPasswordForm } from "@/components/pages/auth/root";
+
+export default function ForgotPasswordPage() {
+  return (
+    <div className="forgot-password-page">
+      <ForgotPasswordForm />
+    </div>
+  );
 }

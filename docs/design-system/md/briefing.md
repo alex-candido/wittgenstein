@@ -4,10 +4,10 @@
 presenterai (um Micro-SaaS)
 
 **Core Objective:**
-Capacitar usuários a criar apresentações completas e visualmente impactantes, no formato Excalidraw, de forma rápida e inteligente. O foco é transformar um simples prompt ou um conteúdo bruto em uma apresentação estruturada e customizável, minimizando o esforço manual.
+Capacitar usuários a criar uma vasta gama de conteúdos visuais—desde apresentações completas e visualmente impactantes, até diagramas complexos de página única (como fluxogramas e mapas mentais)—no formato Excalidraw, de forma rápida e inteligente. O foco é transformar um simples prompt ou um conteúdo bruto em uma estrutura customizável, minimizando o esforço manual.
 
 **Description:**
-`presenterai` é uma ferramenta de IA que reinventa o processo de criação de apresentações. Em vez de começar com uma tela em branco, o usuário fornece um tema ou conteúdo inicial. A IA então propõe um **esboço (outline)** completo da apresentação, slide por slide. Este esboço é totalmente editável, permitindo que o usuário refine a narrativa. Para cada slide no esboço, o usuário pode definir parâmetros cruciais como o **tipo de layout visual** (ex: comparação, linha do tempo, processo), a **profundidade do conteúdo** (de conciso a extenso) e palavras-chave para guiar a IA. Após a aprovação do esboço, a IA gera todos os slides no formato Excalidraw, entregando uma apresentação pronta dentro de um ambiente de edição intuitivo.
+`presenterai` é uma ferramenta de IA que reinventa o processo de criação de apresentações. Em vez de começar com uma tela em branco, o usuário fornece um tema ou conteúdo inicial. A IA então propõe um **esboço (outline)** da estrutura do conteúdo, que pode ser uma sequência de slides, um fluxograma, um mapa mental ou outro tipo de visual. Este esboço é totalmente editável, permitindo que o usuário refine a narrativa ou a lógica estrutural. Para cada item no esboço (seja um slide, um nó de diagrama ou um tópico de mapa mental), o usuário pode definir parâmetros cruciais como o **tipo de layout visual** (ex: comparação, linha do tempo, processo), a **profundidade do conteúdo** (de conciso a extenso) e palavras-chave para guiar a IA. Após a aprovação do esboço, a IA gera o conteúdo visual completo no formato Excalidraw, entregando um resultado pronto dentro de um ambiente de edição intuitivo.
 
 **Target Audience:**
 Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precise criar apresentações de forma ágil, mas que não queira sacrificar a qualidade visual ou a estrutura da narrativa.
@@ -22,15 +22,15 @@ Profissionais, educadores, estudantes, palestrantes e qualquer pessoa que precis
 
 **Key Features**
 
-*   **Criação Multi-fonte:** Inicie uma apresentação a partir de um simples prompt de texto ou colando um conteúdo/artigo existente.
-*   **Outline Inteligente:** A IA gera um esboço estruturado (títulos e tópicos) de toda a apresentação, servindo como um primeiro rascunho da narrativa.
-*   **Esboço 100% Editável:** Total controle para adicionar, remover, reordenar e editar os slides propostos pela IA antes da geração visual.
-*   **Customização por Slide:** Capacidade de ajustar cada slide individualmente, definindo:
+*   **Geração de Conteúdo Versátil:** Inicie a criação de uma apresentação multi-slide, um fluxograma, um mapa mental, ou outros diagramas a partir de um simples prompt de texto ou colando um conteúdo/artigo existente.
+*   **Outline Inteligente e Flexível:** A IA gera um esboço estrutural (em JSON) que se adapta ao tipo de conteúdo. Para apresentações, é uma lista de slides. Para diagramas, descreve os elementos e suas conexões.
+*   **Esboço 100% Editável:** Total controle para adicionar, remover, reordenar e editar a estrutura proposta pela IA antes da geração visual, otimizando o resultado e o uso de tokens.
+*   **Customização Detalhada:** Capacidade de ajustar cada parte do outline individualmente (ex: o layout de um slide, o formato de um nó em um diagrama), definindo:
     *   O **layout visual** (ex: Comparação, Linha do Tempo).
     *   A **profundidade do conteúdo** (ex: Conciso, Detalhado).
     *   **Palavras-chave** para focar o tópico.
-*   **Geração para Excalidraw:** Converte o esboço customizado em uma apresentação completa e visualmente rica, renderizada no formato Excalidraw.
-*   **Ambiente de Edição Integrado:** Um editor que combina a lista de slides para navegação com um canvas Excalidraw para ajustes finos e edições manuais.
+*   **Geração para Excalidraw:** Converte o esboço customizado em um conteúdo visual completo e rico, renderizado no formato Excalidraw.
+*   **Ambiente de Edição Integrado:** Um editor que combina a navegação pela estrutura do conteúdo com um canvas Excalidraw para ajustes finos e edições manuais.
 
 **Conceptual Diagram:**
 

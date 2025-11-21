@@ -11,8 +11,8 @@ No fluxo da aplicação, o conceito de `Document` é abstraído da interface do 
 *   **Entidades:**
     *   `User`: O usuário do sistema.
     *   `Document`: **(Conceito Interno)** A fonte de conteúdo (prompt, texto) que agrupa um ciclo de geração.
-    *   `Generation`: O resultado de uma geração, contendo o "outline" (esboço) da apresentação.
-    *   `Presentation`: A apresentação final com os slides, gerada a partir de um `Generation`.
+    *   `Generation`: O resultado de uma geração, contendo o "outline" (esboço) estruturado de um conteúdo visual, que pode ser tanto `MULTI_PAGE` (uma apresentação) quanto `SINGLE_PAGE` (um diagrama).
+    *   `Presentation`: O conteúdo visual final (com um ou mais slides/páginas), gerado a partir de um `Generation`.
 
 *   **Associações (Banco de Dados):**
     *   **User <-> Document (one-to-many):** Um `User` pode criar vários `Document`s.

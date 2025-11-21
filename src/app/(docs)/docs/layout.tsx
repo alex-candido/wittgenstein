@@ -1,6 +1,7 @@
 "use client";
 
 import { LayoutApp, LayoutMain } from "@/components/layouts";
+import { DocsLayoutHeader, DocsLayoutSidebar } from "@/components/pages/docs/root";
 
 export default function AuthLayout({
   children,
@@ -12,7 +13,11 @@ export default function AuthLayout({
       id="docs"
       className="flex min-h-screen w-full flex-col bg-muted/40"
     >
-      <LayoutMain>{children}</LayoutMain>
+      <DocsLayoutSidebar />
+      <div className="layout-container">
+        <DocsLayoutHeader />
+        <LayoutMain>{children}</LayoutMain>
+      </div>
     </LayoutApp>
   );
 }

@@ -1,3 +1,16 @@
-export default function Page() {
-  return <h1>list project</h1>;
+"use client";
+
+import {
+  DocumentsHeader,
+  DocumentsListSection,
+  DocumentsStatsSection,
+} from "@/components/pages/admin/documents";
+export default function AdminDocumentsPage() {
+  return (
+    <div className="admin-documents-page">
+      <DocumentsHeader />
+      <DocumentsStatsSection />
+      <DocumentsListSection />
+    </div>
+  );
 }

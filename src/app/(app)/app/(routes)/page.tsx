@@ -1,19 +1,15 @@
 import {
-  AppFormControls,
-  AppFormHeader,
-  AppFormInput,
-  AppFormMode,
+  AppForm,
+  AppHeader,
   AppRecents,
-  AppSuggestions,
-} from "@/components/app/root";
+  AppSuggestions
+} from "@/components/pages/app/root";
 
 export default function AppPage() {
   return (
     <div className="app-page">
-      <AppFormHeader />
-      <AppFormMode />
-      <AppFormInput />
-      <AppFormControls />
+      <AppHeader />
+      <AppForm />
       <AppRecents />
       <AppSuggestions />
     </div>

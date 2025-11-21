@@ -3,10 +3,46 @@
 import type { ReactNode } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
-import { AppProvider } from "@/providers/app-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
-import { AppGenerateProvider } from "@/providers/app-generate-provider";
-import { AppPresentationsProvider } from "@/providers/app-presentations-provider";
+import {
+  AdminDashboardProvider,
+  AdminDocumentsProvider,
+  AdminGenerationsProvider,
+  AdminPresentationsProvider,
+  AdminUsersProvider,
+} from "@/providers/admin";
+import {
+  AppDocumentsProvider,
+  AppGenerateProvider,
+  AppPresentationsProvider,
+  AppProvider,
+} from "@/providers/app";
+import { AuthProvider } from "@/providers/auth";
+import { DocsProvider } from "@/providers/docs";
+import { HomeProvider } from "@/providers/home";
+import { ThemeProvider } from "@/providers/next";
+import { TermsProvider } from "@/providers/terms";
+
+const AdminProviders = ({ children }: { children: ReactNode }) => (
+  <AdminDashboardProvider>
+    <AdminDocumentsProvider>
+      <AdminGenerationsProvider>
+        <AdminPresentationsProvider>
+          <AdminUsersProvider>{children}</AdminUsersProvider>
+        </AdminPresentationsProvider>
+      </AdminGenerationsProvider>
+    </AdminDocumentsProvider>
+  </AdminDashboardProvider>
+);
+
+const AppProviders = ({ children }: { children: ReactNode }) => (
+  <AppProvider>
+    <AppDocumentsProvider>
+      <AppGenerateProvider>
+        <AppPresentationsProvider>{children}</AppPresentationsProvider>
+      </AppGenerateProvider>
+    </AppDocumentsProvider>
+  </AppProvider>
+);
 
 export function Providers({
   children,
@@ -20,14 +56,20 @@ export function Providers({
       enableSystem
       disableTransitionOnChange
     >
-      <AppProvider>
-        <AppGenerateProvider>
-          <AppPresentationsProvider>
-            {children}
-            <Toaster />
-          </AppPresentationsProvider>
-        </AppGenerateProvider>
-      </AppProvider>
+      <AuthProvider>
+        <HomeProvider>
+          <DocsProvider>
+            <TermsProvider>
+              <AppProviders>
+                <AdminProviders>
+                  {children}
+                  <Toaster />
+                </AdminProviders>
+              </AppProviders>
+            </TermsProvider>
+          </DocsProvider>
+        </HomeProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

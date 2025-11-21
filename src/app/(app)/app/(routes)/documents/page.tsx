@@ -1,9 +1,17 @@
 "use client";
 
-export default function Page() {
+import {
+  DocumentsHeader,
+  DocumentsList,
+  DocumentsToolbar
+} from "@/components/pages/app/documents";
+
+export default function DocumentsPage() {
   return (
     <div className="documents-page">
-      <p>List documents</p>
+      <DocumentsHeader />
+      <DocumentsToolbar />
+      <DocumentsList />
     </div>
   );
 }

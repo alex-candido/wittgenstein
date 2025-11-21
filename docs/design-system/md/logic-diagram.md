@@ -12,6 +12,11 @@ Enum PresentationStyle {
   MINIMALIST
 }
 
+Enum GenerationScope {
+  MULTI_PAGE  // For content with multiple slides/pages
+  SINGLE_PAGE // For a single, isolated visual
+}
+
 Enum UserRole {
   ADMIN
   MEMBER
@@ -51,8 +56,9 @@ Table Generation {
   id               integer      [primary key]
   uuid             string       [unique]
   document_id      integer      [ref: > Document.id, not null]
+  scope            GenerationScope [not null, default: "MULTI_PAGE"]
   prompt           text         [not null, comment: "The specific user input/prompt for this generation"]
-  outline          json         [not null, comment: "JSON array for the editable outline. Structure: [{title, topics, layout_type, content_depth, keywords}]"]
+  outline          json         [not null, comment: "Logical structure. For MULTI_PAGE, it's an array of objects (slides). For SINGLE_PAGE, it's a single object. The 'layout' property within the JSON (e.g., 'FLOWCHART', 'COMPARISON') defines the visual representation."]
   ai_metadata      json         [comment: "Metadata from the AI agent run (e.g., token usage, model version)"]
   status           Status       [default: "ACTIVE"]
   created_at       timestamp
@@ -65,7 +71,7 @@ Table Presentation {
   generation_id    integer      [ref: > Generation.id, not null]
   user_id          integer      [ref: > User.id, not null]
   title            string       [not null]
-  slides           json         [not null, comment: "Array of Excalidraw scene data for each slide"]
+  content          json         [not null, comment: "Array of Excalidraw scene data. Will contain multiple items for MULTI_PAGE scope, and a single item for SINGLE_PAGE scope."]
   style            PresentationStyle [comment: "Overall style of the presentation"]
   language         string       [comment: "e.g., 'pt-BR', 'en-US'"]
   status           Status       [default: "ACTIVE"]

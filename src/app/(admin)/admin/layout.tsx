@@ -1,7 +1,7 @@
 "use client";
 
-import { AdminAside, AdminFooter, AdminHeader } from "@/components/admin";
 import { LayoutApp, LayoutMain } from "@/components/layouts";
+import { AdminLayoutAside, AdminLayoutFooter, AdminLayoutHeader } from "@/components/pages/admin/root";
 
 export default function AdminLayout({
   children,
@@ -13,11 +13,11 @@ export default function AdminLayout({
       id="admin"
       className="flex min-h-screen w-full flex-col bg-muted/40"
     >
-      <AdminAside />
+      <AdminLayoutAside />
       <div className="layout-container">
-        <AdminHeader />
+        <AdminLayoutHeader />
         <LayoutMain>{children}</LayoutMain>
-        <AdminFooter />
+        <AdminLayoutFooter />
       </div>
     </LayoutApp>
   );

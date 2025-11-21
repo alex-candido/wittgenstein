@@ -1,9 +1,19 @@
 "use client";
 
-export default function Page() {
+import {
+  PresentationsHeader,
+  PresentationsSidebar,
+  PresentationsTools,
+  PresentationsWorkspace,
+} from "@/components/pages/app/presentations";
+
+export default function PresentationPage() {
   return (
-    <div className="presentation-page">
-      <p>Presentation workspace</p>
+    <div className="presentations-page">
+      <PresentationsHeader />
+      <PresentationsSidebar />
+      <PresentationsWorkspace />
+      <PresentationsTools />
     </div>
   );
 }
