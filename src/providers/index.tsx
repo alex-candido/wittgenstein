@@ -19,7 +19,11 @@ import {
 import { AuthProvider } from "@/providers/auth";
 import { DocsProvider } from "@/providers/docs";
 import { HomeProvider } from "@/providers/home";
-import { ReactQueryProvider, ThemeProvider } from "@/providers/next";
+import {
+  NextAuthProvider,
+  ReactQueryProvider,
+  ThemeProvider,
+} from "@/providers/next";
 import { TermsProvider } from "@/providers/terms";
 
 const AdminProviders = ({ children }: { children: ReactNode }) => (
@@ -44,19 +48,27 @@ const AppProviders = ({ children }: { children: ReactNode }) => (
   </AppProvider>
 );
 
+const NextProviders = ({ children }: { children: ReactNode }) => (
+  <ReactQueryProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <NextAuthProvider>{children}</NextAuthProvider>
+    </ThemeProvider>
+  </ReactQueryProvider>
+);
+
 export function Providers({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
   return (
-    <ReactQueryProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
+    <>
+      <NextProviders>
         <AuthProvider>
           <HomeProvider>
             <DocsProvider>
@@ -71,7 +83,7 @@ export function Providers({
             </DocsProvider>
           </HomeProvider>
         </AuthProvider>
-      </ThemeProvider>
-    </ReactQueryProvider>
+      </NextProviders>
+    </>
   );
 }
