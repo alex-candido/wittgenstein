@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+enum PresentationStyle {
+  PROFESSIONAL
+  CREATIVE
+  MINIMALIST
+}
+
+enum GenerationScope {
+  MULTI_PAGE
+  SINGLE_PAGE
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  uuid          String   @unique @default(uuid())
+  username      String   @unique
+  email         String   @unique
+  password_hash String
+  role          UserRole @default(MEMBER)
+  status        Status   @default(ACTIVE)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  documents     Document[]
+  generations   Generation[]
+  presentations Presentation[]
+}
+
+model Document {
+  id                     Int        @id @default(autoincrement())
+  uuid                   String     @unique @default(uuid())
+  user_id                Int
+  title                  String
+  visibility             Visibility @default(PRIVATE)
+  latest_generation_id   Int?
+  latest_presentation_id Int?
+  status                 Status     @default(ACTIVE)
+  created_at             DateTime   @default(now())
+  updated_at             DateTime   @updatedAt
+
+  user        User         @relation(fields: [user_id], references: [id])
+  generations Generation[]
+}
+
+model Generation {
+  id          Int             @id @default(autoincrement())
+  uuid        String          @unique @default(uuid())
+  document_id Int
+  user_id     Int
+  scope       GenerationScope @default(MULTI_PAGE)
+  prompt      String          @db.Text
+  outline     Json
+  ai_metadata Json?
+  status      Status          @default(ACTIVE)
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
+
+  user          User           @relation(fields: [user_id], references: [id])
+  document      Document       @relation(fields: [document_id], references: [id])
+  presentations Presentation[]
+}
+
+model Presentation {
+  id            Int                @id @default(autoincrement())
+  uuid          String             @unique @default(uuid())
+  generation_id Int
+  user_id       Int
+  title         String
+  content       Json
+  style         PresentationStyle?
+  language      String?
+  status        Status             @default(ACTIVE)
+  created_at    DateTime           @default(now())
+  updated_at    DateTime           @updatedAt
+
+  generation Generation @relation(fields: [generation_id], references: [id])
+  user       User       @relation(fields: [user_id], references: [id])
+}

@@ -19,7 +19,7 @@ import {
 import { AuthProvider } from "@/providers/auth";
 import { DocsProvider } from "@/providers/docs";
 import { HomeProvider } from "@/providers/home";
-import { ThemeProvider } from "@/providers/next";
+import { ReactQueryProvider, ThemeProvider } from "@/providers/next";
 import { TermsProvider } from "@/providers/terms";
 
 const AdminProviders = ({ children }: { children: ReactNode }) => (
@@ -50,26 +50,28 @@ export function Providers({
   children: ReactNode;
 }>) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <AuthProvider>
-        <HomeProvider>
-          <DocsProvider>
-            <TermsProvider>
-              <AppProviders>
-                <AdminProviders>
-                  {children}
-                  <Toaster />
-                </AdminProviders>
-              </AppProviders>
-            </TermsProvider>
-          </DocsProvider>
-        </HomeProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <ReactQueryProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <AuthProvider>
+          <HomeProvider>
+            <DocsProvider>
+              <TermsProvider>
+                <AppProviders>
+                  <AdminProviders>
+                    {children}
+                    <Toaster />
+                  </AdminProviders>
+                </AppProviders>
+              </TermsProvider>
+            </DocsProvider>
+          </HomeProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </ReactQueryProvider>
   );
 }
