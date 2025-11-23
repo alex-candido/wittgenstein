@@ -22,7 +22,7 @@ export function useUsersQueryClient() {
   const queryClient = useQueryClient();
   const { list, create, get, update, updatePartial, destroy } = userActions();
 
-  function listUsers(params?: UserInputParams): UseQueryResult<UserListResponse, Error> {
+  function listUsers(params?: UserListParams): UseQueryResult<UserListResponse, Error> {
     const { ...filters } = params || {};
     const queryKey = USER_QUERY_KEYS.list(filters);
 

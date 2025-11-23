@@ -21,10 +21,9 @@ export const userFactory = async (
   data?: Partial<Prisma.UserCreateInput>,
 ) => {
   const defaults: Prisma.UserCreateInput = {
-    uuid: faker.string.uuid(),
-    username: faker.internet.username(),
+    name: faker.person.fullName(),
     email: faker.internet.email(),
-    password_hash: faker.internet.password(),
+    passwordHash: faker.internet.password(),
     role: getRandomEnumValue(UserRole),
     status: getRandomEnumValue(Status),
   };
@@ -34,11 +33,10 @@ export const userFactory = async (
 export const documentFactory = async (
   prisma: PrismaClient,
   data: Partial<Prisma.DocumentCreateInput> & {
-    user: { connect: { id: number } };
+    user: { connect: { id: string } };
   },
 ) => {
   const defaults: Omit<Prisma.DocumentCreateInput, "user"> = {
-    uuid: faker.string.uuid(),
     title: faker.lorem.words({ min: 3, max: 8 }),
     visibility: getRandomEnumValue(Visibility),
     status: getRandomEnumValue(Status),
@@ -49,16 +47,15 @@ export const documentFactory = async (
 export const generationFactory = async (
   prisma: PrismaClient,
   data: Partial<Prisma.GenerationCreateInput> & {
-    document: { connect: { id: number } };
-    user: { connect: { id: number } };
+    document: { connect: { id: string } };
+    user: { connect: { id: string } };
   },
 ) => {
   const defaults: Omit<Prisma.GenerationCreateInput, "document" | "user"> = {
-    uuid: faker.string.uuid(),
     scope: getRandomEnumValue(GenerationScope),
     prompt: faker.lorem.paragraph(),
     outline: { content: faker.lorem.paragraphs(2, "\n\n") },
-    ai_metadata: {
+    aiMetadata: {
       tokens: faker.number.int({ min: 100, max: 1000 }),
       model: "gemini-1.5-pro",
     },
@@ -70,13 +67,12 @@ export const generationFactory = async (
 export const presentationFactory = async (
   prisma: PrismaClient,
   data: Partial<Prisma.PresentationCreateInput> & {
-    user: { connect: { id: number } };
-    generation: { connect: { id: number } };
+    user: { connect: { id: string } };
+    generation: { connect: { id: string } };
   },
 ) => {
   const defaults: Omit<Prisma.PresentationCreateInput, "user" | "generation"> =
     {
-      uuid: faker.string.uuid(),
       title: faker.lorem.words({ min: 5, max: 12 }),
       content: { slides: faker.lorem.paragraphs(3, "\n\n") },
       style: getRandomEnumValue(PresentationStyle),

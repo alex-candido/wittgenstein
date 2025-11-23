@@ -22,7 +22,7 @@ export function usePresentationsQueryClient() {
   const queryClient = useQueryClient();
   const { list, create, get, update, updatePartial, destroy } = presentationActions();
 
-  function listPresentations(params?: PresentationInputParams): UseQueryResult<PresentationListResponse, Error> {
+  function listPresentations(params?: PresentationListParams): UseQueryResult<PresentationListResponse, Error> {
     const { ...filters } = params || {};
     const queryKey = PRESENTATION_QUERY_KEYS.list(filters);
 

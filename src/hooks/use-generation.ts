@@ -22,7 +22,7 @@ export function useGenerationsQueryClient() {
   const queryClient = useQueryClient();
   const { list, create, get, update, updatePartial, destroy } = generationActions();
 
-  function listGenerations(params?: GenerationInputParams): UseQueryResult<GenerationListResponse, Error> {
+  function listGenerations(params?: GenerationListParams): UseQueryResult<GenerationListResponse, Error> {
     const { ...filters } = params || {};
     const queryKey = GENERATION_QUERY_KEYS.list(filters);
 

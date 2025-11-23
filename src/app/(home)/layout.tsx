@@ -1,7 +1,7 @@
 "use client";
 
 import { LayoutApp, LayoutMain } from "@/components/layouts";
-import { HomeLayoutFooter, HomeLayoutHeader } from "@/components/pages/home/root";
+import { HomeLayoutFooter, HomeLayoutHeader } from "@/components/pages/home/layout";
 
 export default function HomeLayout({
   children,

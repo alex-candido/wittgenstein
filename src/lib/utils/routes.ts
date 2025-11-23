@@ -34,7 +34,7 @@ export const APP_ROUTES = {
   },
 
   APP: {
-    DASHBOARD: {
+    APP: {
       path: '/app',
       label: 'Dashboard',
       icon: 'Gauge',

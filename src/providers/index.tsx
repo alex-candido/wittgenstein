@@ -20,7 +20,6 @@ import { AuthProvider } from "@/providers/auth";
 import { DocsProvider } from "@/providers/docs";
 import { HomeProvider } from "@/providers/home";
 import {
-  NextAuthProvider,
   ReactQueryProvider,
   ThemeProvider,
 } from "@/providers/next";
@@ -56,7 +55,7 @@ const NextProviders = ({ children }: { children: ReactNode }) => (
       enableSystem
       disableTransitionOnChange
     >
-      <NextAuthProvider>{children}</NextAuthProvider>
+      {children}
     </ThemeProvider>
   </ReactQueryProvider>
 );

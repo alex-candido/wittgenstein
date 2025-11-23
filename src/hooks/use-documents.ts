@@ -22,7 +22,7 @@ export function useDocumentsQueryClient() {
   const queryClient = useQueryClient();
   const { list, create, get, update, updatePartial, destroy } = documentActions();
 
-  function listDocuments(params?: DocumentInputParams): UseQueryResult<DocumentListResponse, Error> {
+  function listDocuments(params?: DocumentListParams): UseQueryResult<DocumentListResponse, Error> {
     const { ...filters } = params || {};
     const queryKey = DOCUMENT_QUERY_KEYS.list(filters);
 

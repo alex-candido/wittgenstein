@@ -56,7 +56,7 @@ async function main(quantity: number = 10) {
     for (const document of documents) {
       const generation = await generationFactory(prisma, {
         document: { connect: { id: document.id } },
-        user: { connect: { id: document.user_id } },
+        user: { connect: { id: document.userId } },
       });
       generations.push(generation);
     }
@@ -69,7 +69,7 @@ async function main(quantity: number = 10) {
   async function seedPresentations(generations: Generation[]) {
     console.log(chalk.cyan(`🌱 Seeding presentations for ${generations.length} generations...`));
     for (const generation of generations) {
-      const document = await prisma.document.findUnique({ where: { id: generation.document_id }, include: { user: true } });
+      const document = await prisma.document.findUnique({ where: { id: generation.documentId }, include: { user: true } });
       if (document) {
         await presentationFactory(prisma, {
           generation: { connect: { id: generation.id } },

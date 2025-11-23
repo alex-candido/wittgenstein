@@ -1,7 +1,7 @@
 "use client";
 
 import { LayoutApp, LayoutMain } from "@/components/layouts";
-import { AdminLayoutAside, AdminLayoutFooter, AdminLayoutHeader } from "@/components/pages/admin/root";
+import { AdminLayoutAside, AdminLayoutFooter, AdminLayoutHeader } from "@/components/pages/admin/layout";
 
 export default function AdminLayout({
   children,

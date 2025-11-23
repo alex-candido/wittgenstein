@@ -1,7 +1,7 @@
 "use client";
 
 import { LayoutApp, LayoutMain } from "@/components/layouts";
-import { DocsLayoutHeader, DocsLayoutSidebar } from "@/components/pages/docs/root";
+import { DocsLayoutHeader, DocsLayoutSidebar } from "@/components/pages/docs/layout";
 
 export default function AuthLayout({
   children,

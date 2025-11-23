@@ -1,42 +1,20 @@
-enum Status {
-  INACTIVE = 0,
-  ACTIVE = 1,
-}
-
-enum PresentationStyle {
-  PROFESSIONAL = 0,
-  CREATIVE = 1,
-  MINIMALIST = 2,
-}
-
 type PresentationInput = {
-  generation_id: number;
   title: string;
+  content: JsonValue;
   style: PresentationStyle;
   language: string;
+  status: Status;
 };
 
-type PresentationInputParams = {
+type PresentationListParams = {
   page?: number;
-  page_size?: number;
+  pageSize?: number;
   customQueryKey?: string[];
   staleTime?: number;
   [key: string]: unknown;
 };
 
-interface IPresentation {
-  id: number;
-  uuid: string;
-  generation_id: number;
-  user_id: number;
-  title: string;
-  content: any | JSON; 
-  style: PresentationStyle;
-  language: string;
-  status: Status;
-  created_at: Date;
-  updated_at: Date;
-};
+type IPresentation = $Result.DefaultSelection<Prisma.$PresentationPayload>;
 
 type PresentationListResponse = {
   total: number;

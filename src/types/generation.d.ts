@@ -1,40 +1,20 @@
-enum Status {
-  INACTIVE = 0,
-  ACTIVE = 1,
-}
-
-enum GenerationScope {
-  MULTI_PAGE = 0,
-  SINGLE_PAGE = 1,
-}
-
 type GenerationInput = {
-  document_id: number;
   scope: GenerationScope;
   prompt: string;
+  outline: JsonValue;
+  aiMetadata: JsonValue;
+  status: Status;
 };
 
-type GenerationInputParams = {
+type GenerationListParams = {
   page?: number;
-  page_size?: number;
+  pageSize?: number;
   customQueryKey?: string[];
   staleTime?: number;
   [key: string]: unknown;
 };
 
-
-interface IGeneration {
-  id: number;
-  uuid: string;
-  document_id: number;
-  scope: GenerationScope;
-  prompt: string;
-  outline: any | JSON; 
-  ai_metadata: any | JSON; 
-  status: Status;
-  created_at: Date;
-  updated_at: Date;
-};
+type IGeneration = $Result.DefaultSelection<Prisma.$GenerationPayload>
 
 type GenerationListResponse = {
   total: number;
